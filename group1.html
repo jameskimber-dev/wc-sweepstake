@@ -39,6 +39,13 @@
   .t-grp { background: rgba(232,243,232,0.08); color: #9FB8A6; }
   .t-out { background: rgba(140,47,35,0.3); color: #E0A79E; }
   .t-champ { background: #D9A441; color: #14150E; }
+  .pbadge { display: inline-block; vertical-align: middle; font-family: 'Inter', sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px; margin-left: 6px; }
+  .b-full { background: rgba(217,164,65,0.15); color: #D9A441; }
+  .b-thread { background: rgba(140,47,35,0.35); color: #E0A79E; }
+  .b-out { background: rgba(232,243,232,0.08); color: #9FB8A6; }
+  .card-dead { opacity: 0.6; }
   .waiting { text-align: center; padding: 40px 20px; }
   .race-row { display: flex; align-items: center; gap: 10px; padding: 7px 12px; }
   .race-pos { font-family: 'Anton'; font-size: 15px; width: 22px; color: #5E7A66; }
@@ -175,11 +182,19 @@ function render() {
   html += `<div class="sub" style="padding:8px 12px 4px;font-size:11px;">
     Approximate, from bookmaker odds — for fun, not financial advice. Updates as teams are knocked out.</div></div>`;
 
-  for (const p of CONFIG.players) {
-    const aliveN = p.teams.filter(t => !t[2]).length;
-    const total = p.teams.length;
-    const pct = winPct(p);
-    html += `<div class="card"><div class="pname">${p.name}
+  const playerCards = CONFIG.players.map(p => ({
+    p,
+    aliveN: p.teams.filter(t => !t[2]).length,
+    total: p.teams.length,
+    pct: winPct(p),
+  })).sort((a, b) => (b.aliveN > 0) - (a.aliveN > 0) || b.pct - a.pct);
+
+  for (const { p, aliveN, total, pct } of playerCards) {
+    let badge = "";
+    if (aliveN === 0) badge = `<span class="pbadge b-out">Out</span>`;
+    else if (total > 1 && aliveN === 1) badge = `<span class="pbadge b-thread">On the brink</span>`;
+    else if (aliveN === total) badge = `<span class="pbadge b-full">Full house</span>`;
+    html += `<div class="card ${aliveN === 0 ? "card-dead" : ""}"><div class="pname">${p.name}${badge}
       <span class="alive" style="color:${aliveN ? "#D9A441" : "#8C2F23"}">${aliveN}/${total} still in · ${fmt(pct)}%</span></div>`;
     p.teams.forEach((t, i) => {
       const [id, round, out] = t;
