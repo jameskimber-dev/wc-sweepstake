@@ -1,0 +1,197 @@
+{
+  "lastUpdated": "25 June 2026, 23:55 · auto-updated from live results",
+  "teams": {
+    "ALG": {
+      "round": 0,
+      "out": false
+    },
+    "ARG": {
+      "round": 1,
+      "out": false
+    },
+    "AUS": {
+      "round": 1,
+      "out": false
+    },
+    "AUT": {
+      "round": 1,
+      "out": false
+    },
+    "BEL": {
+      "round": 0,
+      "out": false
+    },
+    "BIH": {
+      "round": 0,
+      "out": false
+    },
+    "BRA": {
+      "round": 1,
+      "out": false
+    },
+    "CAN": {
+      "round": 1,
+      "out": false
+    },
+    "CIV": {
+      "round": 1,
+      "out": false
+    },
+    "COD": {
+      "round": 0,
+      "out": false
+    },
+    "COL": {
+      "round": 1,
+      "out": false
+    },
+    "CPV": {
+      "round": 0,
+      "out": false
+    },
+    "CRO": {
+      "round": 0,
+      "out": false
+    },
+    "CUW": {
+      "round": 0,
+      "out": true
+    },
+    "CZE": {
+      "round": 0,
+      "out": true
+    },
+    "ECU": {
+      "round": 0,
+      "out": false
+    },
+    "EGY": {
+      "round": 1,
+      "out": false
+    },
+    "ENG": {
+      "round": 1,
+      "out": false
+    },
+    "ESP": {
+      "round": 1,
+      "out": false
+    },
+    "FRA": {
+      "round": 1,
+      "out": false
+    },
+    "GER": {
+      "round": 1,
+      "out": false
+    },
+    "GHA": {
+      "round": 1,
+      "out": false
+    },
+    "HAI": {
+      "round": 0,
+      "out": true
+    },
+    "IRN": {
+      "round": 1,
+      "out": false
+    },
+    "IRQ": {
+      "round": 0,
+      "out": true
+    },
+    "JOR": {
+      "round": 0,
+      "out": true
+    },
+    "JPN": {
+      "round": 1,
+      "out": false
+    },
+    "KOR": {
+      "round": 0,
+      "out": false
+    },
+    "KSA": {
+      "round": 0,
+      "out": true
+    },
+    "MAR": {
+      "round": 1,
+      "out": false
+    },
+    "MEX": {
+      "round": 1,
+      "out": false
+    },
+    "NED": {
+      "round": 1,
+      "out": false
+    },
+    "NOR": {
+      "round": 1,
+      "out": false
+    },
+    "NZL": {
+      "round": 0,
+      "out": true
+    },
+    "PAN": {
+      "round": 0,
+      "out": true
+    },
+    "PAR": {
+      "round": 0,
+      "out": false
+    },
+    "POR": {
+      "round": 1,
+      "out": false
+    },
+    "QAT": {
+      "round": 0,
+      "out": true
+    },
+    "RSA": {
+      "round": 1,
+      "out": false
+    },
+    "SCO": {
+      "round": 0,
+      "out": false
+    },
+    "SEN": {
+      "round": 0,
+      "out": false
+    },
+    "SUI": {
+      "round": 1,
+      "out": false
+    },
+    "SWE": {
+      "round": 0,
+      "out": false
+    },
+    "TUN": {
+      "round": 0,
+      "out": true
+    },
+    "TUR": {
+      "round": 0,
+      "out": true
+    },
+    "URU": {
+      "round": 1,
+      "out": false
+    },
+    "USA": {
+      "round": 1,
+      "out": false
+    },
+    "UZB": {
+      "round": 0,
+      "out": true
+    }
+  }
+}

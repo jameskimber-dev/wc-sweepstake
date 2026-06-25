@@ -315,8 +315,33 @@ function renderPoolLeaders(agg) {
     <div class="eyebrow" style="padding-bottom:6px;">Boots &amp; Gloves · pool leaders</div>${rows}</div>`;
 }
 
-render();
-enrichStats();
+// Apply the daily auto-derived team status (round + in/out) from status.json,
+// written by the scheduled GitHub Action. Falls back to the embedded CONFIG
+// values above if the file is missing or unreadable.
+async function applyStatus() {
+  try {
+    const res = await fetch("./status.json", { cache: "no-store" });
+    if (!res.ok) return;
+    const s = await res.json();
+    if (!s || !s.teams) return;
+    if (s.lastUpdated) CONFIG.lastUpdated = s.lastUpdated;
+    for (const p of CONFIG.players) {
+      for (const t of p.teams) {
+        const st = s.teams[t[0]];
+        if (!st) continue;
+        if (typeof st.round === "number") t[1] = st.round;
+        if (typeof st.out === "boolean") t[2] = st.out;
+      }
+    }
+  } catch (e) { /* keep embedded CONFIG values */ }
+}
+
+async function init() {
+  await applyStatus();
+  render();
+  enrichStats();
+}
+init();
 </script>
 </body>
 </html>
