@@ -50,6 +50,13 @@
     border-top: 1px solid rgba(232,243,232,0.08); }
   .pstats:empty { display: none; }
   .pstats b { color: #EFF5EE; font-weight: 700; }
+  .poolrow { display: flex; align-items: center; gap: 10px; padding: 9px 2px; }
+  .poolrow + .poolrow { border-top: 1px solid rgba(232,243,232,0.08); }
+  .poolico { font-size: 20px; width: 26px; text-align: center; }
+  .poollabel { font-family: 'Anton', sans-serif; text-transform: uppercase;
+    font-size: 14px; letter-spacing: 0.04em; color: #D9A441; width: 104px; flex-shrink: 0; }
+  .poolwin { font-size: 14px; color: #EFF5EE; }
+  .poolwin b { color: #D9A441; }
   .waiting { text-align: center; padding: 40px 20px; }
   .race-row { display: flex; align-items: center; gap: 10px; padding: 7px 12px; }
   .race-pos { font-family: 'Anton'; font-size: 15px; width: 22px; color: #5E7A66; }
@@ -194,6 +201,8 @@ function render() {
   html += `<div class="sub" style="padding:8px 12px 4px;font-size:11px;">
     Approximate, from bookmaker odds — for fun, not financial advice. Updates as teams are knocked out.</div></div>`;
 
+  html += `<div id="pool-stats"></div>`;
+
   const playerCards = CONFIG.players.map(p => ({
     p,
     aliveN: p.teams.filter(t => !t[2]).length,
@@ -207,7 +216,7 @@ function render() {
     if (aliveN === 0) badge = `<span class="pbadge b-out">Out</span>`;
     else if (total > 1 && aliveN === 1) badge = `<span class="pbadge b-thread">On the brink</span>`;
     else if (aliveN === total) badge = `<span class="pbadge b-full">Full house</span>`;
-    PLAYER_STATS_MAP.push({ idx, codes: p.teams.map(t => t[0]) });
+    PLAYER_STATS_MAP.push({ idx, name: p.name, codes: p.teams.map(t => t[0]) });
     html += `<div class="card ${aliveN === 0 ? "card-dead" : ""}"><div class="pname">${p.name}${badge}
       <span class="alive" style="color:${aliveN ? "#D9A441" : "#8C2F23"}">${aliveN}/${total} still in · ${fmt(pct)}%</span></div>`;
     p.teams.forEach((t, i) => {
@@ -270,7 +279,8 @@ async function enrichStats() {
   let tally;
   try { tally = await loadTeamTally(); } catch (e) { return; }
   if (!tally) return;
-  for (const { idx, codes } of PLAYER_STATS_MAP) {
+  const agg = [];
+  for (const { idx, name, codes } of PLAYER_STATS_MAP) {
     let gf = 0, ga = 0, cs = 0, have = false;
     for (const code of codes) {
       const t = tally[code];
@@ -280,7 +290,29 @@ async function enrichStats() {
     if (el && have) {
       el.innerHTML = `⚽ <b>${gf}</b> scored · <b>${ga}</b> conceded · 🧤 <b>${cs}</b> clean sheet${cs === 1 ? "" : "s"}`;
     }
+    if (have) agg.push({ name, gf, ga, cs });
   }
+  renderPoolLeaders(agg);
+}
+
+function renderPoolLeaders(agg) {
+  const host = document.getElementById("pool-stats");
+  if (!host || !agg.length) return;
+  const leaders = (key) => {
+    const max = Math.max(...agg.map(a => a[key]));
+    if (max <= 0) return null;
+    return { names: agg.filter(a => a[key] === max).map(a => a.name), value: max };
+  };
+  const boot = leaders("gf"), glove = leaders("cs");
+  let rows = "";
+  if (boot) rows += `<div class="poolrow"><span class="poolico">🥇</span>
+    <span class="poollabel">Golden Boot</span>
+    <span class="poolwin">${boot.names.join(", ")} · <b>${boot.value}</b> goal${boot.value === 1 ? "" : "s"}</span></div>`;
+  if (glove) rows += `<div class="poolrow"><span class="poolico">🧤</span>
+    <span class="poollabel">Golden Glove</span>
+    <span class="poolwin">${glove.names.join(", ")} · <b>${glove.value}</b> clean sheet${glove.value === 1 ? "" : "s"}</span></div>`;
+  if (rows) host.innerHTML = `<div class="card">
+    <div class="eyebrow" style="padding-bottom:6px;">Boots &amp; Gloves · pool leaders</div>${rows}</div>`;
 }
 
 render();
