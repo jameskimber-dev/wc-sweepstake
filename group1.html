@@ -46,6 +46,10 @@
   .b-thread { background: rgba(140,47,35,0.35); color: #E0A79E; }
   .b-out { background: rgba(232,243,232,0.08); color: #9FB8A6; }
   .card-dead { opacity: 0.6; }
+  .pstats { font-size: 12px; color: #9FB8A6; margin-top: 9px; padding-top: 9px;
+    border-top: 1px solid rgba(232,243,232,0.08); }
+  .pstats:empty { display: none; }
+  .pstats b { color: #EFF5EE; font-weight: 700; }
   .waiting { text-align: center; padding: 40px 20px; }
   .race-row { display: flex; align-items: center; gap: 10px; padding: 7px 12px; }
   .race-pos { font-family: 'Anton'; font-size: 15px; width: 22px; color: #5E7A66; }
@@ -189,11 +193,13 @@ function render() {
     pct: winPct(p),
   })).sort((a, b) => (b.aliveN > 0) - (a.aliveN > 0) || b.pct - a.pct);
 
-  for (const { p, aliveN, total, pct } of playerCards) {
+  PLAYER_STATS_MAP = [];
+  playerCards.forEach(({ p, aliveN, total, pct }, idx) => {
     let badge = "";
     if (aliveN === 0) badge = `<span class="pbadge b-out">Out</span>`;
     else if (total > 1 && aliveN === 1) badge = `<span class="pbadge b-thread">On the brink</span>`;
     else if (aliveN === total) badge = `<span class="pbadge b-full">Full house</span>`;
+    PLAYER_STATS_MAP.push({ idx, codes: p.teams.map(t => t[0]) });
     html += `<div class="card ${aliveN === 0 ? "card-dead" : ""}"><div class="pname">${p.name}${badge}
       <span class="alive" style="color:${aliveN ? "#D9A441" : "#8C2F23"}">${aliveN}/${total} still in · ${fmt(pct)}%</span></div>`;
     p.teams.forEach((t, i) => {
@@ -205,11 +211,72 @@ function render() {
         <span class="pot">P${i + 1}</span><span class="flag">${TEAMS[id][1]}</span>
         <span>${TEAMS[id][0]}</span><span class="tag ${cls}">${label}</span></div>`;
     });
+    html += `<div class="pstats" id="pstats-${idx}"></div>`;
     html += `</div>`;
-  }
+  });
   app.innerHTML = html;
 }
+
+// ---- Live match stats: goals + clean sheets from ESPN's public FIFA World Cup
+// feed (keyless, CORS-enabled, unofficial). The page renders fully without it;
+// if any fetch fails we simply skip the stats line. ----
+let PLAYER_STATS_MAP = [];
+
+async function loadTeamTally() {
+  const base = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=";
+  // Two windows (group stage, then knockouts) keep each response under ESPN's
+  // 100-event cap; events are de-duplicated by id.
+  const windows = ["20260611-20260627", "20260628-20260719"];
+  const seen = new Set();
+  const tally = {};
+  for (const w of windows) {
+    let data;
+    try {
+      const res = await fetch(base + w);
+      if (!res.ok) continue;
+      data = await res.json();
+    } catch (e) { continue; }
+    for (const ev of (data.events || [])) {
+      if (seen.has(ev.id)) continue;
+      seen.add(ev.id);
+      const c = ev.competitions && ev.competitions[0];
+      const st = c && c.status && c.status.type;
+      const done = st && (st.completed === true || st.state === "post" || st.description === "Full Time");
+      if (!done) continue;
+      const cs = c.competitors || [];
+      if (cs.length !== 2) continue;
+      for (const [me, opp] of [[cs[0], cs[1]], [cs[1], cs[0]]]) {
+        const code = me.team && me.team.abbreviation;
+        if (!code) continue;
+        const sf = Number(me.score), sa = Number(opp.score);
+        const t = tally[code] || (tally[code] = { gf: 0, ga: 0, cs: 0 });
+        if (Number.isFinite(sf)) t.gf += sf;
+        if (Number.isFinite(sa)) { t.ga += sa; if (sa === 0) t.cs++; }
+      }
+    }
+  }
+  return Object.keys(tally).length ? tally : null;
+}
+
+async function enrichStats() {
+  let tally;
+  try { tally = await loadTeamTally(); } catch (e) { return; }
+  if (!tally) return;
+  for (const { idx, codes } of PLAYER_STATS_MAP) {
+    let gf = 0, ga = 0, cs = 0, have = false;
+    for (const code of codes) {
+      const t = tally[code];
+      if (t) { have = true; gf += t.gf; ga += t.ga; cs += t.cs; }
+    }
+    const el = document.getElementById("pstats-" + idx);
+    if (el && have) {
+      el.innerHTML = `⚽ <b>${gf}</b> scored · <b>${ga}</b> conceded · 🧤 <b>${cs}</b> clean sheet${cs === 1 ? "" : "s"}`;
+    }
+  }
+}
+
 render();
+enrichStats();
 </script>
 </body>
 </html>
