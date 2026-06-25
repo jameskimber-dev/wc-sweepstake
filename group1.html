@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Cup 2026 Sweepstake</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; }
+  body { min-height: 100vh; background: #0B1F15; color: #EFF5EE;
+    font-family: 'Inter', system-ui, sans-serif;
+    background-image:
+      radial-gradient(ellipse 120% 60% at 50% -10%, #143A26 0%, transparent 60%),
+      repeating-linear-gradient(0deg, transparent 0 79px, rgba(232,243,232,0.04) 79px 80px);
+    padding: 20px 14px 60px; }
+  .wrap { max-width: 480px; margin: 0 auto; }
+  .display { font-family: 'Anton', sans-serif; letter-spacing: 0.02em; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #D9A441; font-weight: 700; }
+  h1 { font-family: 'Anton', sans-serif; font-size: clamp(34px, 9vw, 56px);
+    line-height: 0.95; text-transform: uppercase; margin: 6px 0 4px; }
+  .sub { color: #9FB8A6; font-size: 13px; }
+  .card { background: #102A1C; border: 1px solid rgba(232,243,232,0.1);
+    border-radius: 14px; padding: 14px; margin-top: 14px; }
+  .banner { background: #D9A441; color: #14150E; text-align: center; border: none; }
+  .banner .display { font-size: 24px; text-transform: uppercase; }
+  .pname { font-family: 'Anton', sans-serif; font-size: 20px;
+    text-transform: uppercase; margin-bottom: 10px; }
+  .alive { float: right; font-size: 15px; }
+  .teamrow { display: flex; align-items: center; gap: 8px;
+    background: #0B1F15; border: 1px solid rgba(232,243,232,0.12);
+    border-radius: 10px; padding: 9px 10px; font-size: 14px; margin-top: 7px; }
+  .teamrow.dead { opacity: 0.45; }
+  .flag { font-size: 18px; }
+  .pot { font-size: 10px; color: #5E7A66; font-weight: 700; width: 20px; }
+  .tag { margin-left: auto; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+  .t-in { background: rgba(217,164,65,0.15); color: #D9A441; }
+  .t-grp { background: rgba(232,243,232,0.08); color: #9FB8A6; }
+  .t-out { background: rgba(140,47,35,0.3); color: #E0A79E; }
+  .t-champ { background: #D9A441; color: #14150E; }
+  .waiting { text-align: center; padding: 40px 20px; }
+  .race-row { display: flex; align-items: center; gap: 10px; padding: 7px 12px; }
+  .race-pos { font-family: 'Anton'; font-size: 15px; width: 22px; color: #5E7A66; }
+  .race-name { font-weight: 600; font-size: 14px; width: 96px; flex-shrink: 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .race-track { flex: 1; height: 9px; background: rgba(232,243,232,0.07);
+    border-radius: 999px; overflow: hidden; }
+  .race-fill { height: 100%; background: #D9A441; border-radius: 999px; }
+  .race-pct { font-family: 'Anton'; font-size: 15px; width: 50px; text-align: right; }
+  .race-pct.zero { color: #5E7A66; }
+  footer { margin-top: 26px; font-size: 11px; color: #5E7A66; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">USA · Canada · Mexico 2026</div>
+  <h1>The Sweepstake</h1>
+  <p class="sub" id="updated"></p>
+  <div id="app"></div>
+  <footer>Winner takes all — whoever holds the world champions takes the pot.</footer>
+</div>
+
+<script>
+/* ================= CONFIG — edited by the admin =================
+   ROUNDS: 0 Groups · 1 R32 · 2 R16 · 3 QF · 4 SF · 5 Final · 6 CHAMPIONS
+   Each player: { name, teams: [[id, round, out], ...] }
+   out: true once eliminated. round = furthest stage reached.
+================================================================ */
+const CONFIG = {
+  lastUpdated: "25 June 2026 — group stage finishing, R32 taking shape",
+  drawDone: true,
+  players: [
+    { name: "James",     teams: [["COL",1,false],["TUN",0,true],["SWE",0,false]] },
+    { name: "Jas",       teams: [["ENG",0,false],["KOR",0,false],["IRQ",0,false]] },
+    { name: "Olly",      teams: [["ESP",0,false],["NOR",1,false],["QAT",0,true]] },
+    { name: "Hugo",      teams: [["GER",1,false],["ALG",0,false],["PAN",0,true]] },
+    { name: "Jack Shaw", teams: [["POR",0,false],["AUS",0,false],["BIH",1,false]] },
+    { name: "Cam",       teams: [["CRO",0,false],["AUT",0,false],["UZB",0,false]] },
+    { name: "Abbie",     teams: [["MAR",1,false],["EGY",0,false],["CUW",0,true]] },
+    { name: "Jon",       teams: [["ARG",1,false],["CAN",1,false],["HAI",0,true]] },
+    { name: "Jess",      teams: [["FRA",1,false],["SEN",0,false],["NZL",0,false]] },
+    { name: "Joe",       teams: [["USA",1,false],["IRN",0,false],["CPV",0,false]] },
+    { name: "Chris",     teams: [["BEL",0,false],["TUR",0,true],["RSA",1,false]] },
+    { name: "Westy",     teams: [["MEX",1,false],["ECU",1,false],["GHA",0,false]] },
+    { name: "Tom",       teams: [["BRA",1,false],["JPN",0,false],["JOR",0,true]] },
+    { name: "Sophie",    teams: [["URU",0,false],["PAR",0,false],["KSA",0,false]] },
+    { name: "Malcolm",   teams: [["NED",0,false],["CIV",1,false],["CZE",0,true]] },
+    { name: "Dan",       teams: [["SUI",1,false],["SCO",0,false],["COD",0,false]] },
+  ],
+};
+
+const TEAMS = {
+  ESP:["Spain","🇪🇸"],ARG:["Argentina","🇦🇷"],FRA:["France","🇫🇷"],ENG:["England","🏴󠁧󠁢󠁥󠁮󠁧󠁿"],
+  BRA:["Brazil","🇧🇷"],POR:["Portugal","🇵🇹"],NED:["Netherlands","🇳🇱"],BEL:["Belgium","🇧🇪"],
+  GER:["Germany","🇩🇪"],CRO:["Croatia","🇭🇷"],MAR:["Morocco","🇲🇦"],COL:["Colombia","🇨🇴"],
+  MEX:["Mexico","🇲🇽"],USA:["USA","🇺🇸"],SUI:["Switzerland","🇨🇭"],URU:["Uruguay","🇺🇾"],
+  JPN:["Japan","🇯🇵"],SEN:["Senegal","🇸🇳"],IRN:["Iran","🇮🇷"],KOR:["South Korea","🇰🇷"],
+  ECU:["Ecuador","🇪🇨"],AUT:["Austria","🇦🇹"],AUS:["Australia","🇦🇺"],CAN:["Canada","🇨🇦"],
+  NOR:["Norway","🇳🇴"],TUR:["Türkiye","🇹🇷"],EGY:["Egypt","🇪🇬"],ALG:["Algeria","🇩🇿"],
+  SCO:["Scotland","🏴󠁧󠁢󠁳󠁣󠁴󠁿"],PAR:["Paraguay","🇵🇾"],TUN:["Tunisia","🇹🇳"],CIV:["Côte d'Ivoire","🇨🇮"],
+  PAN:["Panama","🇵🇦"],CZE:["Czechia","🇨🇿"],SWE:["Sweden","🇸🇪"],QAT:["Qatar","🇶🇦"],
+  KSA:["Saudi Arabia","🇸🇦"],UZB:["Uzbekistan","🇺🇿"],IRQ:["Iraq","🇮🇶"],RSA:["South Africa","🇿🇦"],
+  GHA:["Ghana","🇬🇭"],BIH:["Bosnia & Herz.","🇧🇦"],JOR:["Jordan","🇯🇴"],CPV:["Cabo Verde","🇨🇻"],
+  COD:["DR Congo","🇨🇩"],CUW:["Curaçao","🇨🇼"],HAI:["Haiti","🇭🇹"],NZL:["New Zealand","🇳🇿"],
+};
+const ROUNDS = ["Groups","R32","R16","QF","SF","Final","Champions"];
+
+// Approximate title-win weights, derived from bookmaker/prediction-market
+// odds (late group stage). Relative weights only — the page normalises them
+// across all teams still alive, so player chances always sum to 100%.
+const WINPROB = {
+  FRA:20, ARG:13, ESP:14, ENG:9, BRA:7.5, POR:7, GER:6.5, NED:5,
+  BEL:2.5, MAR:2.5, USA:2.9, MEX:2.8, JPN:2.1, COL:2, URU:2, NOR:1.5,
+  CRO:1.5, SUI:1.3, SEN:1.2, TUR:0.7, AUT:0.6, CAN:0.6, ECU:0.5, EGY:0.5,
+  KOR:0.4, ALG:0.4, SWE:0.4, AUS:0.3, SCO:0.3, CIV:0.3, CZE:0.3, IRN:0.2,
+  PAR:0.2, TUN:0.2, GHA:0.2, BIH:0.2, CPV:0.15, PAN:0.1, QAT:0.1, KSA:0.1,
+  UZB:0.1, IRQ:0.1, RSA:0.1, JOR:0.1, COD:0.1, CUW:0.05, HAI:0.05, NZL:0.05,
+};
+
+function render() {
+  const app = document.getElementById("app");
+  document.getElementById("updated").textContent =
+    CONFIG.lastUpdated ? "Last updated: " + CONFIG.lastUpdated : "";
+
+  if (!CONFIG.drawDone || !CONFIG.players.length) {
+    app.innerHTML = `<div class="card waiting">
+      <div class="display" style="font-size:22px;">⚽ Draw coming soon</div>
+      <p class="sub" style="margin-top:8px;">Once everyone's in, teams will be drawn
+      at random from strength pots and appear here. Winner takes the pot.</p></div>`;
+    return;
+  }
+
+  let html = "";
+
+  // ---- Win-chance maths: normalise alive teams so players sum to 100% ----
+  const wt = (id, out) => (out ? 0 : (WINPROB[id] || 0));
+  let totalWt = 0;
+  for (const p of CONFIG.players)
+    for (const [id, , out] of p.teams) totalWt += wt(id, out);
+  const winPct = (p) => {
+    if (totalWt <= 0) return 0;
+    const sum = p.teams.reduce((s, [id, , out]) => s + wt(id, out), 0);
+    return (sum / totalWt) * 100;
+  };
+  const fmt = (x) => x >= 9.95 ? x.toFixed(0) : x.toFixed(1);
+
+  // Champion banner
+  let champ = null, champHolder = null;
+  for (const p of CONFIG.players)
+    for (const [id, round] of p.teams)
+      if (round === 6) { champ = id; champHolder = p.name; }
+  if (champ) {
+    html += `<div class="card banner">
+      <div class="display">🏆 ${champHolder} wins the pot!</div>
+      <div style="font-size:13px;font-weight:600;">${TEAMS[champ][1]} ${TEAMS[champ][0]} are world champions</div>
+    </div>`;
+  }
+
+  // Title race card (players ranked by chance of holding the champion)
+  const ranked = CONFIG.players
+    .map(p => ({ name: p.name, pct: winPct(p) }))
+    .sort((a, b) => b.pct - a.pct);
+  const maxPct = ranked.length ? Math.max(ranked[0].pct, 0.01) : 1;
+  html += `<div class="card" style="padding:10px 2px;">
+    <div class="eyebrow" style="padding:4px 12px 8px;">Title race · chance of holding the winner</div>`;
+  ranked.forEach((r, i) => {
+    html += `<div class="race-row">
+      <span class="race-pos">${i + 1}</span>
+      <span class="race-name">${r.name}</span>
+      <span class="race-track"><span class="race-fill" style="width:${(r.pct / maxPct) * 100}%"></span></span>
+      <span class="race-pct ${r.pct < 0.05 ? "zero" : ""}">${fmt(r.pct)}%</span>
+    </div>`;
+  });
+  html += `<div class="sub" style="padding:8px 12px 4px;font-size:11px;">
+    Approximate, from bookmaker odds — for fun, not financial advice. Updates as teams are knocked out.</div></div>`;
+
+  for (const p of CONFIG.players) {
+    const aliveN = p.teams.filter(t => !t[2]).length;
+    const total = p.teams.length;
+    const pct = winPct(p);
+    html += `<div class="card"><div class="pname">${p.name}
+      <span class="alive" style="color:${aliveN ? "#D9A441" : "#8C2F23"}">${aliveN}/${total} still in · ${fmt(pct)}%</span></div>`;
+    p.teams.forEach((t, i) => {
+      const [id, round, out] = t;
+      const isChamp = round === 6;
+      const cls = isChamp ? "t-champ" : out ? "t-out" : round > 0 ? "t-in" : "t-grp";
+      const label = isChamp ? "🏆 CHAMPIONS" : out ? `OUT · ${ROUNDS[round]}` : `IN · ${ROUNDS[round]}`;
+      html += `<div class="teamrow ${out ? "dead" : ""}">
+        <span class="pot">P${i + 1}</span><span class="flag">${TEAMS[id][1]}</span>
+        <span>${TEAMS[id][0]}</span><span class="tag ${cls}">${label}</span></div>`;
+    });
+    html += `</div>`;
+  }
+  app.innerHTML = html;
+}
+render();
+</script>
+</body>
+</html>
