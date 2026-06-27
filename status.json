@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "26 June 2026, 09:46 · auto-updated from live results",
+  "lastUpdated": "27 June 2026, 09:23 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 0,
@@ -18,7 +18,7 @@
       "out": false
     },
     "BEL": {
-      "round": 0,
+      "round": 1,
       "out": false
     },
     "BIH": {
@@ -46,7 +46,7 @@
       "out": false
     },
     "CPV": {
-      "round": 0,
+      "round": 1,
       "out": false
     },
     "CRO": {
@@ -94,7 +94,7 @@
       "out": true
     },
     "IRN": {
-      "round": 1,
+      "round": 0,
       "out": false
     },
     "IRQ": {
@@ -142,7 +142,7 @@
       "out": true
     },
     "PAR": {
-      "round": 0,
+      "round": 1,
       "out": false
     },
     "POR": {
@@ -170,7 +170,7 @@
       "out": false
     },
     "SWE": {
-      "round": 0,
+      "round": 1,
       "out": false
     },
     "TUN": {
@@ -182,7 +182,7 @@
       "out": true
     },
     "URU": {
-      "round": 1,
+      "round": 0,
       "out": false
     },
     "USA": {
