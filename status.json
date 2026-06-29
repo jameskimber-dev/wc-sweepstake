@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "28 June 2026, 09:38 · auto-updated from live results",
+  "lastUpdated": "29 June 2026, 11:18 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
@@ -155,7 +155,7 @@
     },
     "RSA": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "SCO": {
       "round": 0,
