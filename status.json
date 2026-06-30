@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "29 June 2026, 11:18 · auto-updated from live results",
+  "lastUpdated": "30 June 2026, 09:52 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
@@ -30,7 +30,7 @@
       "out": false
     },
     "CAN": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "CIV": {
@@ -83,7 +83,7 @@
     },
     "GER": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "GHA": {
       "round": 1,
@@ -107,7 +107,7 @@
     },
     "JPN": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "KOR": {
       "round": 0,
@@ -118,7 +118,7 @@
       "out": true
     },
     "MAR": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "MEX": {
@@ -127,7 +127,7 @@
     },
     "NED": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "NOR": {
       "round": 1,
