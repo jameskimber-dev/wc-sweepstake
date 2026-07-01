@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "30 June 2026, 09:52 · auto-updated from live results",
+  "lastUpdated": "1 July 2026, 10:25 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
@@ -26,7 +26,7 @@
       "out": false
     },
     "BRA": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "CAN": {
@@ -35,7 +35,7 @@
     },
     "CIV": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "COD": {
       "round": 1,
@@ -63,7 +63,7 @@
     },
     "ECU": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "EGY": {
       "round": 1,
@@ -78,7 +78,7 @@
       "out": false
     },
     "FRA": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "GER": {
@@ -130,7 +130,7 @@
       "out": true
     },
     "NOR": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "NZL": {
@@ -142,7 +142,7 @@
       "out": true
     },
     "PAR": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "POR": {
@@ -171,7 +171,7 @@
     },
     "SWE": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "TUN": {
       "round": 0,
