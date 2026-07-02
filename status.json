@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "1 July 2026, 10:25 · auto-updated from live results",
+  "lastUpdated": "2 July 2026, 09:38 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
@@ -18,12 +18,12 @@
       "out": false
     },
     "BEL": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "BIH": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "BRA": {
       "round": 2,
@@ -39,7 +39,7 @@
     },
     "COD": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "COL": {
       "round": 1,
@@ -70,7 +70,7 @@
       "out": false
     },
     "ENG": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "ESP": {
@@ -122,7 +122,7 @@
       "out": false
     },
     "MEX": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "NED": {
@@ -163,7 +163,7 @@
     },
     "SEN": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "SUI": {
       "round": 1,
@@ -186,7 +186,7 @@
       "out": false
     },
     "USA": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "UZB": {
