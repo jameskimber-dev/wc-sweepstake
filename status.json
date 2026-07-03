@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2 July 2026, 09:38 · auto-updated from live results",
+  "lastUpdated": "3 July 2026, 09:44 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "ARG": {
       "round": 1,
@@ -15,7 +15,7 @@
     },
     "AUT": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "BEL": {
       "round": 2,
@@ -51,7 +51,7 @@
     },
     "CRO": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "CUW": {
       "round": 0,
@@ -74,7 +74,7 @@
       "out": false
     },
     "ESP": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "FRA": {
@@ -146,7 +146,7 @@
       "out": false
     },
     "POR": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "QAT": {
