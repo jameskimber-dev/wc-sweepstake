@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "3 July 2026, 09:44 · auto-updated from live results",
+  "lastUpdated": "4 July 2026, 09:18 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
       "out": true
     },
     "ARG": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "AUS": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "AUT": {
       "round": 1,
@@ -42,12 +42,12 @@
       "out": true
     },
     "COL": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "CPV": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "CRO": {
       "round": 1,
@@ -66,7 +66,7 @@
       "out": true
     },
     "EGY": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "ENG": {
@@ -87,7 +87,7 @@
     },
     "GHA": {
       "round": 1,
-      "out": false
+      "out": true
     },
     "HAI": {
       "round": 0,
@@ -166,7 +166,7 @@
       "out": true
     },
     "SUI": {
-      "round": 1,
+      "round": 2,
       "out": false
     },
     "SWE": {
