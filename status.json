@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "4 July 2026, 09:18 · auto-updated from live results",
+  "lastUpdated": "5 July 2026, 09:37 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
@@ -31,7 +31,7 @@
     },
     "CAN": {
       "round": 2,
-      "out": false
+      "out": true
     },
     "CIV": {
       "round": 1,
@@ -78,7 +78,7 @@
       "out": false
     },
     "FRA": {
-      "round": 2,
+      "round": 3,
       "out": false
     },
     "GER": {
@@ -118,7 +118,7 @@
       "out": true
     },
     "MAR": {
-      "round": 2,
+      "round": 3,
       "out": false
     },
     "MEX": {
@@ -143,7 +143,7 @@
     },
     "PAR": {
       "round": 2,
-      "out": false
+      "out": true
     },
     "POR": {
       "round": 2,
