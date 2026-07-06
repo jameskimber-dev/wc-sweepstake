@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "5 July 2026, 09:37 · auto-updated from live results",
+  "lastUpdated": "6 July 2026, 10:51 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
@@ -27,7 +27,7 @@
     },
     "BRA": {
       "round": 2,
-      "out": false
+      "out": true
     },
     "CAN": {
       "round": 2,
@@ -70,7 +70,7 @@
       "out": false
     },
     "ENG": {
-      "round": 2,
+      "round": 3,
       "out": false
     },
     "ESP": {
@@ -123,14 +123,14 @@
     },
     "MEX": {
       "round": 2,
-      "out": false
+      "out": true
     },
     "NED": {
       "round": 1,
       "out": true
     },
     "NOR": {
-      "round": 2,
+      "round": 3,
       "out": false
     },
     "NZL": {
