@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "10 July 2026, 09:57 · auto-updated from live results",
+  "lastUpdated": "10 July 2026, 21:50 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
@@ -95,7 +95,7 @@
     },
     "IRN": {
       "round": 0,
-      "out": false
+      "out": true
     },
     "IRQ": {
       "round": 0,
@@ -111,7 +111,7 @@
     },
     "KOR": {
       "round": 0,
-      "out": false
+      "out": true
     },
     "KSA": {
       "round": 0,
@@ -159,7 +159,7 @@
     },
     "SCO": {
       "round": 0,
-      "out": false
+      "out": true
     },
     "SEN": {
       "round": 1,
@@ -183,7 +183,7 @@
     },
     "URU": {
       "round": 0,
-      "out": false
+      "out": true
     },
     "USA": {
       "round": 2,

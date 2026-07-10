@@ -47,6 +47,7 @@ async function derive() {
   // 2) Knockout progress from the scoreboard — real teams only (bracket
   //    placeholders like "A1"/"W73" carry fake abbreviations, so we skip them).
   const seen = new Set();
+  let koStarted = false; // true once any completed knockout match is seen
   for (const w of WINDOWS) {
     const data = await get(SCOREBOARD + w);
     for (const ev of (data.events || [])) {
@@ -60,6 +61,7 @@ async function derive() {
       if (comps.length !== 2) continue;
       const bothReal = comps.every((x) => real.has(x.team?.abbreviation));
       const done = c.status?.type?.completed === true;
+      if (done && bothReal) koStarted = true;
       for (const x of comps) {
         const code = x.team?.abbreviation;
         if (!real.has(code)) continue;
@@ -68,6 +70,18 @@ async function derive() {
         if (done && slug !== "3rd-place-match" && x.winner !== true) t.out = true; // lost a KO = eliminated
         if (done && slug === "final" && x.winner === true) { t.round = 6; t.out = false; } // champion
       }
+    }
+  }
+
+  // 3) Group stage is settled the moment the knockouts begin — the R32 can't
+  //    start until every group game is played. ESPN leaves non-qualifying
+  //    third-placed teams tagged "Best 8 advance" (never "Eliminated"), so they
+  //    slip through step 1 as round-0/in. Once the KO has started, any real team
+  //    that never advanced (still round 0, not out) did not qualify → eliminate.
+  if (koStarted) {
+    for (const code of real) {
+      const t = status[code];
+      if (t && t.round === 0 && !t.out) t.out = true;
     }
   }
   return status;
