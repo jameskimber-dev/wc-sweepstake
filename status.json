@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "9 July 2026, 10:00 · auto-updated from live results",
+  "lastUpdated": "10 July 2026, 09:57 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
@@ -119,7 +119,7 @@
     },
     "MAR": {
       "round": 3,
-      "out": false
+      "out": true
     },
     "MEX": {
       "round": 2,
