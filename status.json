@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "10 July 2026, 21:50 · auto-updated from live results",
+  "lastUpdated": "11 July 2026, 08:29 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
@@ -19,7 +19,7 @@
     },
     "BEL": {
       "round": 3,
-      "out": false
+      "out": true
     },
     "BIH": {
       "round": 1,
@@ -74,11 +74,11 @@
       "out": false
     },
     "ESP": {
-      "round": 3,
+      "round": 4,
       "out": false
     },
     "FRA": {
-      "round": 3,
+      "round": 4,
       "out": false
     },
     "GER": {
