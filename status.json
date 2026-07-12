@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "11 July 2026, 08:29 · auto-updated from live results",
+  "lastUpdated": "12 July 2026, 08:54 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
       "out": true
     },
     "ARG": {
-      "round": 3,
+      "round": 4,
       "out": false
     },
     "AUS": {
@@ -70,7 +70,7 @@
       "out": true
     },
     "ENG": {
-      "round": 3,
+      "round": 4,
       "out": false
     },
     "ESP": {
@@ -131,7 +131,7 @@
     },
     "NOR": {
       "round": 3,
-      "out": false
+      "out": true
     },
     "NZL": {
       "round": 0,
@@ -167,7 +167,7 @@
     },
     "SUI": {
       "round": 3,
-      "out": false
+      "out": true
     },
     "SWE": {
       "round": 1,
