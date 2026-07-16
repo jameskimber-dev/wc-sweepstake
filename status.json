@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "15 July 2026, 08:46 · auto-updated from live results",
+  "lastUpdated": "16 July 2026, 08:51 · auto-updated from live results",
   "teams": {
     "ALG": {
       "round": 1,
       "out": true
     },
     "ARG": {
-      "round": 4,
+      "round": 5,
       "out": false
     },
     "AUS": {
@@ -71,10 +71,10 @@
     },
     "ENG": {
       "round": 4,
-      "out": false
+      "out": true
     },
     "ESP": {
-      "round": 4,
+      "round": 5,
       "out": false
     },
     "FRA": {
